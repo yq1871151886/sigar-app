@@ -1,0 +1,1418 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="YangQigong" id="xuanyuantong-mobile-1.0.0-202012101555" dbms="oracle">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ADDRESSCOLLECTION"/>
+            </not>
+            <not>
+                <tableExists tableName="APPUPDATEVERSION"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_ACCOUNT"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_ACCOUNT_CONSUMPTION"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_ACCOUNT_DEPOSIT"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_ACCOUNT_RECHARGE"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_ACCOUNT_REFUND"/>
+            </not>
+            <not>
+                <tableExists tableName="APP_RECHARGE_RECORD"/>
+            </not>
+            <not>
+                <tableExists tableName="CARD_CHAECKYEAR_LIST"/>
+            </not>
+            <not>
+                <tableExists tableName="CARD_CHECKYEAR_RECORD"/>
+            </not>
+            <not>
+                <tableExists tableName="CARD_RECHARGE"/>
+            </not>
+            <not>
+                <tableExists tableName="CUSTOMER"/>
+            </not>
+            <not>
+                <tableExists tableName="CUSTOMERCONSUMPTIONINFO"/>
+            </not>
+            <not>
+                <tableExists tableName="CUSTOMERPRODUCTINFO"/>
+            </not>
+            <not>
+            <tableExists tableName="FACECAPTURE_STATION_LINK"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_CARDTYPE"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_CENTER_PARAMS"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_CENTER_PARAMS_BAK"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_DEPT_INFO"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_DEVICE_PERSONINFO"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_DEVICE_SYSTEMINFO"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_LOGONINFOS"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_NET_PARAMS"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_ROAD_INFO"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_STATION_INFO"/>
+            </not>
+            <not>
+                <tableExists tableName="FACE_SYS_BASIC_PARAMS"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_ACCOUNT"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_ACC_DAILY"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_ACC_JOUR"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_ACC_JOUR_HIS"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_BUS_TIC"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_BUS_TIC_HIS"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_CONSUMPTION_RECORDS"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_DEMO"/>
+            </not>
+            <not>
+                <tableExists tableName="JF_RULE"/>
+            </not>
+            <not>
+                <tableExists tableName="LINE_COLLECTION"/>
+            </not>
+            <not>
+                <tableExists tableName="RSA_KEY"/>
+            </not>
+            <not>
+                <tableExists tableName="RUN_PUBCONTENT"/>
+            </not>
+            <not>
+                <tableExists tableName="RUN_PUBGROUP"/>
+            </not>
+            <not>
+                <tableExists tableName="SHARE_USER"/>
+            </not>
+            <not>
+                <tableExists tableName="SMSVALIDCODE"/>
+            </not>
+            <not>
+                <tableExists tableName="SYS_TEMP_FBT"/>
+            </not>
+            <not>
+                <tableExists tableName="TK_MOT_CARD_TRADE_RC"/>
+            </not>
+            <not>
+                <tableExists tableName="TK_MOT_CARD_TRADE_RC_HIS"/>
+            </not>
+            <not>
+                <tableExists tableName="TRAFFICINFO"/>
+            </not>
+            <not>
+                <tableExists tableName="WALLETACCOUNT"/>
+            </not>
+            <not>
+                <tableExists tableName="WALLETBANK"/>
+            </not>
+            <not>
+                <tableExists tableName="WALLETFLOWRECORD"/>
+            </not>
+            <not>
+                <tableExists tableName="WECHAT_ACCESS_TOKEN"/>
+            </not>
+            <not>
+                <tableExists tableName="XYT_ADVERTISEMENT"/>
+            </not>
+            <not>
+                <tableExists tableName="XYT_ALIPAY_BILL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ADDRESSCOLLECTION" tablespace="YKT_DATA">
+            <column name="ID" remarks="id" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011092"/>
+            </column>
+            <column name="USERID" remarks="用户ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADDRESSCODE" remarks="地理编码" type="VARCHAR2(200 BYTE)"/>
+            <column name="ADDRESSNAME" remarks="地理名称" type="VARCHAR2(200 BYTE)"/>
+            <column name="COLLECTCLASSIFY" remarks="地址分类(0.家和1.公司)" type="NUMBER(2, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DETAILEDADDRESS" remarks="详细地址" type="VARCHAR2(200 BYTE)"/>
+            <column name="ADDTIME" remarks="添加时间" type="date"/>
+            <column name="REMARK" remarks="备注" type="VARCHAR2(100 BYTE)"/>
+            <column name="LONGITUDE" remarks="经度" type="VARCHAR2(30 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LATITUDE" remarks="纬度" type="VARCHAR2(30 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="APPUPDATEVERSION" tablespace="YKT_DATA">
+            <column name="NAME" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011098"/>
+            </column>
+            <column name="LASTESTVERSION" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MINVERSION" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="CONSTRAINTUPDATE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTENT" type="VARCHAR2(1000 BYTE)"/>
+            <column name="DOWNLOADURL" type="VARCHAR2(200 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable remarks="App账户" tableName="APP_ACCOUNT" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011100"/>
+            </column>
+            <column name="CUSTOMERID" remarks="用户id" type="NUMBER"/>
+            <column name="ACCOUNTNO" remarks="账户号" type="VARCHAR2(32 BYTE)"/>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(20 BYTE)"/>
+            <column name="DEPOSIT" remarks="押金" type="NVARCHAR2(100)"/>
+            <column name="BALANCE" remarks="账户余额" type="NVARCHAR2(100)"/>
+            <column name="STATUS" remarks="账户状态 0:冻结，1:正常" type="NUMBER"/>
+            <column name="CREATETIME" remarks="开户时间" type="date"/>
+            <column name="AREANO" remarks="地区编码" type="VARCHAR2(8 BYTE)"/>
+            <column name="CUSTOMERNAME" remarks="用户姓名" type="NVARCHAR2(32)"/>
+            <column defaultValueNumeric="0" name="STATE" remarks="启用状态 0:未启用， 1:启用" type="NUMBER"/>
+            <column name="AMOUNT" remarks="余额备份" type="NVARCHAR2(100)"/>
+            <column defaultValueNumeric="0" name="REFUNDSTATUS" remarks="退款状态 0:未退款，1:退款中，2:已退款" type="NUMBER"/>
+            <column name="REFUNDAMOUNT" remarks="退款金额" type="NVARCHAR2(100)"/>
+        </createTable>
+    
+        <createTable remarks="账户消费记录" tableName="APP_ACCOUNT_CONSUMPTION" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键id" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011102"/>
+            </column>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(15 BYTE)"/>
+            <column name="ORDERNO" remarks="订单号" type="VARCHAR2(64 BYTE)"/>
+            <column name="WAY" remarks="消费方式  0：扫码， 1：卡充值" type="NUMBER"/>
+            <column name="AMOUNT" remarks="消费金额" type="NUMBER"/>
+            <column name="CREATETIME" remarks="消费时间" type="date"/>
+            <column name="CREATEDCHARGE" remarks="是否已经生成了对应的圈存： 1，是；0/null，否；默认null" type="VARCHAR2(5 BYTE)"/>
+            <column name="CARDNO" remarks="CPU卡卡号，当WAY=1时，卡号应该不为空" type="VARCHAR2(30 BYTE)"/>
+            <column name="TRADEFLOWNO" remarks="交易流水号" type="VARCHAR2(64 BYTE)"/>
+            <column name="RIDETIME" remarks="乘车时间" type="date"/>
+            <column name="LINECODE" remarks="乘车线路号" type="VARCHAR2(32 BYTE)"/>
+            <column name="VEHICLECODE" remarks="车辆编号" type="VARCHAR2(32 BYTE)"/>
+            <column name="DRIVERCODE" remarks="司机编号" type="VARCHAR2(30 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="账户押金配置" tableName="APP_ACCOUNT_DEPOSIT" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011105"/>
+            </column>
+            <column name="AREANO" remarks="地区标识" type="VARCHAR2(8 BYTE)"/>
+            <column name="AMOUNT" remarks="金额" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REMARK" remarks="备注" type="NVARCHAR2(255)"/>
+            <column name="CITYNAME" remarks="城市名称" type="VARCHAR2(32 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="App账户充值明细" tableName="APP_ACCOUNT_RECHARGE" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011107"/>
+            </column>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(32 BYTE)"/>
+            <column name="ORDERNO" remarks="订单号" type="VARCHAR2(32 BYTE)"/>
+            <column name="AMOUNT" remarks="充值金额" type="NUMBER"/>
+            <column name="TYPE" remarks="充值类型 0：支付宝，1:微信， 2:银行" type="NUMBER"/>
+            <column name="CREATETIME" remarks="充值时间" type="date"/>
+            <column name="TRADENO" remarks="交易流水号" type="VARCHAR2(32 BYTE)"/>
+            <column defaultValueNumeric="0" name="TRADETYPE" remarks="交易类型 0：充值，1.退款" type="NUMBER"/>
+            <column defaultValueNumeric="0" name="REFUNDSTATUS" remarks="退款状态  0 未退款；1 退款中；2 已退款" type="NUMBER"/>
+        </createTable>
+    
+        <createTable remarks="账户钱包退款记录" tableName="APP_ACCOUNT_REFUND" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011109"/>
+            </column>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(16 BYTE)"/>
+            <column name="NAME" remarks="用户姓名" type="VARCHAR2(32 BYTE)"/>
+            <column name="AMOUNT" remarks="退款金额" type="NUMBER"/>
+            <column name="STATUS" remarks="退款状态 0：未退款 1：已退款 2：退款失败" type="NUMBER(2, 0)"/>
+            <column name="REFUNDTIME" remarks="退款时间" type="date"/>
+            <column name="ADDTIME" remarks="申请时间" type="date"/>
+            <column name="AREANO" remarks="地区编号" type="VARCHAR2(8 BYTE)"/>
+            <column name="SERIALNUMBER" remarks="流水号" type="VARCHAR2(64 BYTE)"/>
+            <column name="REMARK" remarks="备注" type="NVARCHAR2(1000)"/>
+            <column defaultValueNumeric="0" name="REFUNDTYPE" remarks="退款类别 0：自动退款  1：人工退款" type="NUMBER(2, 0)"/>
+            <column name="OPERATOR" remarks="操作员" type="VARCHAR2(64 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="支付宝微信充值退款记录" tableName="APP_RECHARGE_RECORD" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011111"/>
+            </column>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CUSTOMERID" remarks="顾客id" type="NUMBER"/>
+            <column name="PAYTYPE" remarks="充值方式（0：支付宝，1：微信，2：银行）" type="NUMBER"/>
+            <column name="ORDERNO" remarks="订单号" type="VARCHAR2(50 BYTE)"/>
+            <column name="TRADENO" remarks="交易流水号" type="VARCHAR2(64 BYTE)"/>
+            <column name="CREATETIME" remarks="订单创建时间" type="date"/>
+            <column name="TOTALAMOUNT" remarks="交易金额" type="NUMBER"/>
+            <column name="TRADESTATUS" remarks="交易状态（0：未支付，1：已支付，2：已退款）" type="NUMBER"/>
+            <column name="TRADETYPE" remarks="交易类型（0：钱包充值，1：钱包退款，2：卡充值，3：扫码圈存）" type="NUMBER"/>
+            <column name="TRADETIME" remarks="交易时间" type="date"/>
+            <column name="AREANO" remarks="地区编码" type="VARCHAR2(8 BYTE)"/>
+            <column name="SINFOSTATUS" remarks="是否已经生成圈存 1 是 ； 0 否" type="NUMBER"/>
+            <column name="BUYERID" remarks="买家支付宝用户号" type="NVARCHAR2(100)"/>
+            <column name="SELLEREMAIL" remarks="卖家支付宝账号" type="NVARCHAR2(100)"/>
+            <column name="REFUNDNO" remarks="退款单号" type="VARCHAR2(64 BYTE)"/>
+            <column name="CARDNO" remarks="CPU卡卡号" type="VARCHAR2(32 BYTE)"/>
+            <column name="OPNEID" remarks="微信openid" type="NVARCHAR2(32)"/>
+            <column name="IS_POINT" remarks="是否成功生成积分（0：不成功，1成功）" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="CARD_CHAECKYEAR_LIST" tablespace="YKT_DATA">
+            <column name="CARD_NO" remarks="卡号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CARD_TYPE" remarks="卡类型" type="VARCHAR2(3 BYTE)"/>
+            <column name="MACHE_NO" remarks="机具号" type="VARCHAR2(20 BYTE)"/>
+            <column name="TRADE_SEIRAL_NO" remarks="交易号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CHECK_TIME" remarks="年检日期" type="date"/>
+            <column name="NEXT_CHECK_DATE" remarks="下次年检日期 YYYY-MM-DD格式" type="date"/>
+            <column name="IS_SEND" remarks="是否同步 YYYY-MM-DD格式" type="VARCHAR2(3 BYTE)"/>
+            <column name="ID" remarks="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011113"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="CARD_CHECKYEAR_RECORD" tablespace="YKT_DATA">
+            <column name="CARD_NO" remarks="卡号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CARD_TYPE" remarks="卡类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="CHECK_START" remarks="保费有效期起始" type="VARCHAR2(8 BYTE)"/>
+            <column name="CHECK_END" remarks="保费有效期截止" type="VARCHAR2(8 BYTE)"/>
+            <column defaultValueNumeric="0" name="CHECK_STATUS" remarks="年检状态  0：未年检   1：已年检" type="NUMBER(2, 0)"/>
+            <column name="CHECK_TIME" remarks="待年检记录保存日期" type="date"/>
+            <column name="FINISH_TIME" remarks="年检完成日期" type="date"/>
+            <column name="ID_NO" remarks="身份证号" type="VARCHAR2(20 BYTE)"/>
+            <column name="ORDER_NO" remarks="缴费业务单号" type="VARCHAR2(20 BYTE)"/>
+            <column name="TRADE_SERIAL_NO" remarks="年检交易号" type="VARCHAR2(20 BYTE)"/>
+            <column defaultValueNumeric="0" name="IS_SEND" remarks="是否同步，0：未同步，1：同步" type="NUMBER(2, 0)"/>
+        </createTable>
+    
+        <createTable remarks="卡片充值" tableName="CARD_RECHARGE" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键uuid" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011120"/>
+            </column>
+            <column name="SECTIONNO" remarks="号段" type="VARCHAR2(16 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ISALLOWRECHARGE" remarks="是否允许充值（0：不允许，1：允许）" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AREANO" remarks="地区编号" type="VARCHAR2(32 BYTE)"/>
+            <column name="AREANAME" remarks="地区名称" type="VARCHAR2(32 BYTE)"/>
+            <column name="CITYNO" remarks="城市编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CITYNAME" remarks="城市名称" type="VARCHAR2(32 BYTE)"/>
+            <column name="AUTHENTICATEDUSER" remarks="认证用户" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CERTIFICATEADDRESS" remarks="证书地址" type="VARCHAR2(500 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INTERFACEADDRESS" remarks="接口地址" type="VARCHAR2(500 BYTE)"/>
+            <column name="CREATEUSER" remarks="创建用户" type="VARCHAR2(32 BYTE)"/>
+            <column name="CREATETIME" remarks="创建时间" type="date"/>
+            <column name="CARDTYPE" remarks="卡类型" type="NUMBER"/>
+            <column name="AUTHENTICATEPASSWORD" remarks="认证密码" type="VARCHAR2(32 BYTE)"/>
+            <column name="BUSINESSNO" remarks="商户号" type="NVARCHAR2(32)"/>
+            <column name="OPNO" remarks="操作员卡号" type="NVARCHAR2(15)"/>
+            <column name="ACCEPTCODE" remarks="收单机构号" type="NVARCHAR2(16)"/>
+            <column name="BANKACCOUNT" remarks="银行账户" type="NVARCHAR2(32)"/>
+        </createTable>
+    
+        <createTable remarks="用户信息" tableName="CUSTOMER" tablespace="YKT_DATA">
+            <column name="ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CELLPHONENUMBER" type="VARCHAR2(15 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011124"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(50 BYTE)"/>
+            <column name="CREATEDTIME" type="date"/>
+            <column name="CERTIFICATIONSTATUS" type="NUMBER"/>
+            <column name="REFERRERNUMBER" type="VARCHAR2(15 BYTE)"/>
+            <column name="CARDTYPE" type="NUMBER"/>
+            <column name="IDCARDNUMBER" type="VARCHAR2(20 BYTE)"/>
+            <column name="IDCARDPHOTO" type="VARCHAR2(50 BYTE)"/>
+            <column name="IDCARDPHOTOURL" type="VARCHAR2(300 BYTE)"/>
+            <column name="GENDER" type="NUMBER"/>
+            <column name="NICKNAME" type="VARCHAR2(20 BYTE)"/>
+            <column name="BIRTHDAY" type="date"/>
+            <column name="PROVINCECODE" type="VARCHAR2(2 BYTE)"/>
+            <column name="CITYCODE" type="VARCHAR2(4 BYTE)"/>
+            <column name="PORTRAITURL" type="VARCHAR2(300 BYTE)"/>
+            <column name="PORTRAITNAME" type="VARCHAR2(50 BYTE)"/>
+            <column name="ENABLE" type="NUMBER"/>
+            <column name="ONLINESTATUS" type="NUMBER"/>
+            <column name="PASSWORD" type="VARCHAR2(50 BYTE)"/>
+            <column name="TOKEN" type="VARCHAR2(36 BYTE)"/>
+            <column name="ISMERCHANT" type="NUMBER"/>
+            <column name="PROVINCENAME" type="VARCHAR2(200 BYTE)"/>
+            <column name="CITYNAME" type="VARCHAR2(200 BYTE)"/>
+            <column name="WEBCHATOPENID" type="VARCHAR2(128 BYTE)"/>
+            <column name="REFERRERMERCHANT" type="VARCHAR2(15 BYTE)"/>
+            <column defaultValueNumeric="0" name="CUSTOMERTYPE" remarks="用户类型: 0 外部推广员; 1 内部推广员" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REALNAMESTATUS" remarks="实名认证状态" type="NUMBER"/>
+            <column name="REALNAME" remarks="实名认证姓名" type="VARCHAR2(20 BYTE)"/>
+            <column name="REALNAMEID" remarks="实名认证证件号码" type="VARCHAR2(20 BYTE)"/>
+            <column defaultValueNumeric="0" name="TOUCHVERIFY" remarks="是否开启指纹识别：0：未开启  1：开启" type="NUMBER"/>
+            <column defaultValueNumeric="0" name="FACEVERIFY" remarks="是否开启人脸识别： 0：未开启 1：开启" type="NUMBER"/>
+            <column defaultValueNumeric="0" name="TOUCHPAY" remarks="是否开启指纹支付： 0:未开启 1：已开启" type="NUMBER"/>
+            <column name="IMEI" remarks="手机唯一识别码" type="VARCHAR2(64 BYTE)"/>
+            <column name="PAY_CHANNEL" remarks="支付渠道标识：1:邮储银行，2:浙商银行，3:支付宝，4:微信" type="NUMBER(6, 0)"/>
+            <column defaultValueNumeric="0" name="WHITELIST" remarks="是否白名单用户，（0：否，1：是）" type="NUMBER(6, 0)"/>
+            <column name="OPENID" remarks="微信小程序openid" type="NVARCHAR2(32)"/>
+            <column name="SESSIONKEY" remarks="会话密钥" type="NVARCHAR2(128)"/>
+            <column defaultValueNumeric="0" name="DOWNLOADTIMES" remarks="推广下载次数" type="NUMBER"/>
+            <column defaultValueNumeric="0" name="REGISTERTIMES" remarks="推广注册次数" type="NUMBER"/>
+            <column name="SHARECODE" remarks="推广注册码" type="NVARCHAR2(16)"/>
+            <column defaultValueNumeric="1" name="IS_USE_TIC" remarks="是否优先使用停车券：0: 不使用  1 使用" type="NUMBER"/>
+            <column defaultValue="0" name="FACE_PAY_STATUS" remarks="人脸识别服务开通状态：0-未开通，1-已开通" type="VARCHAR2(10 BYTE)"/>
+            <column defaultValue="0" name="FACE_PAY_IMG" remarks="人脸识别图片名称" type="VARCHAR2(40 BYTE)"/>
+            <column defaultValue="0" name="FACE_PAY_TYPE" remarks="人脸识别的卡类型" type="VARCHAR2(20 BYTE)"/>
+            <column defaultValue="0" name="FACE_PAY_IMG_URL" remarks="人脸识别图片路径" type="VARCHAR2(200 BYTE)"/>
+            <column defaultValue="0" name="FACE_IMG_ID" remarks="人脸图片id" type="VARCHAR2(40 BYTE)"/>
+            <column name="WECHAT_NICKNAME" remarks="微信昵称" type="VARCHAR2(100 BYTE)"/>
+            <column name="WECHAT_ACCESSTOKEN" remarks="微信接口调用凭证" type="VARCHAR2(600 BYTE)"/>
+            <column name="WECHAT_HEADIMGURL" remarks="微信头像" type="VARCHAR2(200 BYTE)"/>
+            <column name="WECHAT_REFRESHTOKEN" remarks="用户刷新 access_token" type="VARCHAR2(200 BYTE)"/>
+            <column name="WECHAT_UNIONID" remarks="微信用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的 unionid 是唯一的。" type="VARCHAR2(200 BYTE)"/>
+            <column name="APP_OPENID" remarks="app的openid" type="VARCHAR2(200 BYTE)"/>
+            <column name="CARDID" remarks="给微信生成的id" type="VARCHAR2(200 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="用户消费信息" tableName="CUSTOMERCONSUMPTIONINFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011126"/>
+            </column>
+            <column name="TRADENO" remarks="系统跟踪号（收单机构交易流水号，保证唯一）" type="VARCHAR2(32 BYTE)"/>
+            <column name="UPDATETIME" remarks="上送时间" type="date"/>
+            <column name="CARDASN" remarks="交通一卡通卡号" type="VARCHAR2(32 BYTE)"/>
+            <column name="TRANSACTIONNUMBER" remarks="交易单号" type="VARCHAR2(32 BYTE)"/>
+            <column name="TRADEFARE" remarks="交易金额" type="NUMBER"/>
+            <column name="TRADETIME" remarks="乘车时间" type="date"/>
+            <column name="JTCODE" remarks="交易类型" type="VARCHAR2(32 BYTE)"/>
+            <column name="LINECODE" remarks="乘车线路编号" type="VARCHAR2(32 BYTE)"/>
+            <column name="PAYSTATE" remarks="支付状态&#10;0：所以; 1:未支付;2：已经支付" type="VARCHAR2(20 BYTE)"/>
+            <column name="PAYTIME" remarks="支付时间" type="date"/>
+            <column name="ACCTID" remarks="支付账户号（用户子账户id）" type="VARCHAR2(32 BYTE)"/>
+            <column name="CICODE" remarks="发卡机构号" type="VARCHAR2(10 BYTE)"/>
+            <column name="CACODE" remarks="收单机构号" type="VARCHAR2(10 BYTE)"/>
+            <column name="TRADECOIN" remarks="货币代码" type="VARCHAR2(10 BYTE)"/>
+            <column name="VEHICLECODE" remarks="车辆编号" type="VARCHAR2(32 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="用户产品信息" tableName="CUSTOMERPRODUCTINFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011128"/>
+            </column>
+            <column name="CUSTOMERID" remarks="会员id" type="VARCHAR2(32 BYTE)"/>
+            <column name="CUSTOMERNAME" remarks="会员姓名" type="VARCHAR2(20 BYTE)"/>
+            <column name="PRODUCTID" remarks="产品id(1:二维码乘车，2：人脸支付，3：全部开通)" type="NUMBER"/>
+            <column name="OPENINGTIME" remarks="开通时间" type="date"/>
+            <column name="PRODUCTSTATE" remarks="产品状态" type="VARCHAR2(20 BYTE)"/>
+            <column name="FROZENAMOUNT" remarks="冻结金额" type="NUMBER"/>
+            <column name="FRONTLOGNO" remarks="产品前置流水号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CARDNUMBER" remarks="公交卡号" type="VARCHAR2(32 BYTE)"/>
+            <column name="ID_CARD_NO" remarks="会员身份证号" type="VARCHAR2(32 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="FACECAPTURE_STATION_LINK" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="FACECAPTURE_STATION_LINK_PK"/>
+            </column>
+            <column name="FACECAPTUREID" remarks="枪机编号" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATION_ID" remarks="站点id" type="VARCHAR2(50 BYTE)"/>
+            <column name="CREATEDATE" remarks="入库时间" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATOR" remarks="创建人" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATETIME" remarks="更新时间" type="date"/>
+            <column name="UPDATOR" remarks="更新人" type="VARCHAR2(50 BYTE)"/>
+            <column name="IP" remarks="设备IP" type="VARCHAR2(30 BYTE)"/>
+            <column name="PORT" remarks="设备端口" type="VARCHAR2(10 BYTE)"/>
+            <column name="ACC" remarks="登录账户" type="VARCHAR2(50 BYTE)"/>
+            <column name="PWD" remarks="登录密码" type="VARCHAR2(50 BYTE)"/>
+            <column name="STATUS" remarks="登录状态（1：已登录，0：未登录）" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="FACE_CARDTYPE" tablespace="YKT_DATA">
+            <column name="TYPE" remarks="卡类型编号" type="NUMBER(3, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011136"/>
+            </column>
+            <column name="NAME" remarks="卡类型名称" type="VARCHAR2(255 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="FACE_CENTER_PARAMS" tablespace="YKT_DATA">
+            <column name="CENTER_URL" remarks="服务器地址" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_PORT" remarks="服务器端口" type="VARCHAR2(10 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_USER" remarks="用户名" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_PASS" remarks="密码" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONNECT_CENTER" remarks="是否连接中心" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_SNAPIMAGE" remarks="是否上传实时抓拍图片" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_VERIFYRESULT" remarks="是否上传比对认证结果" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SZRES" remarks="预留字段" type="VARCHAR2(50 BYTE)"/>
+            <column name="DEVICE_ID" remarks="设备id" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEDATE" remarks="创建时间" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATOR" remarks="创建者" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATION_ID" remarks="站台ID" type="VARCHAR2(50 BYTE)"/>
+            <column name="ID" remarks="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FACE_CENTER_PARAMS_ID"/>
+            </column>
+            <column name="UPDATETIME" remarks="更新时间" type="date"/>
+            <column name="UPDATOR" remarks="更新者" type="VARCHAR2(20 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="FACE_CENTER_PARAMS_BAK" tablespace="YKT_DATA">
+            <column name="CENTER_URL" remarks="服务器地址" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_PORT" remarks="服务器端口" type="VARCHAR2(10 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_USER" remarks="用户名" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CENTER_PASS" remarks="密码" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONNECT_CENTER" remarks="连接中心：开关" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_SNAPIMAGE" remarks="发送实时图片" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_VERIFYRESULT" remarks="发送认证结果" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SZRES" remarks="保留字段" type="VARCHAR2(50 BYTE)"/>
+            <column name="DEVICE_ID" remarks="设备ID" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEDATE" remarks="备份日期" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATOR" remarks="操作者" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATION_ID" remarks="站台id" type="VARCHAR2(50 BYTE)"/>
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATETIME" type="date"/>
+            <column name="UPDATOR" type="VARCHAR2(20 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="人脸识别公司" tableName="FACE_DEPT_INFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="FACE_DEPT_PK"/>
+            </column>
+            <column name="DEPT_NO" remarks="公司编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEPT_NAME" remarks="公司名称" type="VARCHAR2(64 BYTE)"/>
+            <column name="ADD_TIME" remarks="入库时间" type="date"/>
+        </createTable>
+    
+        <createTable tableName="FACE_DEVICE_PERSONINFO" tablespace="YKT_DATA">
+            <column name="PERSONID" remarks="pid" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICEID" remarks="设备id" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PERSON_NAME" remarks="用户名字" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GENDER" remarks="0:男 1:女" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONENUMBER" remarks="电话" type="VARCHAR2(50 BYTE)"/>
+            <column name="PERSON_TYPE" remarks="0: 白名单 1: 黑名单" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MJCARDFROM" remarks="0: 无 1: 公用卡号 2: 自动生成 3: 手动输入" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USEVALIDLIST" remarks="0 永久名单 1:临时名单" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEDTIME" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALIDBEGINTIME" remarks="临时名单的有效起始时间" type="VARCHAR2(50 BYTE)"/>
+            <column name="VALIDENDTIME" remarks="临时名单的有效终止时间" type="VARCHAR2(50 BYTE)"/>
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FACE_DEVICE_PERSONINFO_ID"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="FACE_DEVICE_SYSTEMINFO" tablespace="YKT_DATA">
+            <column name="DEVICE_ID" remarks="设备id" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FACE_DEVICE_SYSTEM_DEVICEID"/>
+            </column>
+            <column name="DEVICE_NAME" remarks="设备名称" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IPADDR" remarks="设备ip地址" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PORT" remarks="设备端口号" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICE_VERSION" remarks="设备版本号" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION_UPDATE" remarks="版本更新时间" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBMASK" remarks="子网掩码" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GATEWAY" remarks="网关" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRSTCHOICE_DNS" remarks="首选DNS" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ALTERNATIVE_DNS" remarks="备选DNS" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="FACE_LOGONINFOS" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ISVALID" type="NUMBER"/>
+            <column name="DEVICEID" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PORT" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICENAME" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IPADDR" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BONLINE" type="NUMBER"/>
+            <column name="NTYPE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NDATABASETYPE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SZRES" type="VARCHAR2(50 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="FACE_NET_PARAMS" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="FACE_NET_PARAMS"/>
+            </column>
+            <column name="NAME" remarks="本机名称" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IPADDR" remarks="IP 地址" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBMASK" remarks="子网掩码" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GATEWAY" remarks="网关" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MYLISTENPORT" remarks="监听端口" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MYWEBPORT" remarks="Webserver 端口" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICEID" remarks="设备 ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION" remarks="设备版本号" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEDATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATOR" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATETIME" type="date"/>
+            <column name="UPDATOR" type="VARCHAR2(20 BYTE)"/>
+            <column name="SCREEN_SIZE" remarks="屏幕尺寸" type="VARCHAR2(10 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="道路信息" tableName="FACE_ROAD_INFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="FACE_ROAD_PK"/>
+            </column>
+            <column name="DEPT_NO" remarks="公司编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROAD_NO" remarks="道路编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROAD_NAME" remarks="道路名称" type="VARCHAR2(64 BYTE)"/>
+            <column name="ADD_TIME" remarks="入库时间" type="date"/>
+        </createTable>
+    
+        <createTable remarks="站台信息" tableName="FACE_STATION_INFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="FACE_STATION_PK"/>
+            </column>
+            <column name="ROAD_NO" remarks="道路编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATION_NO" remarks="站台编号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATION_NAME" remarks="站台名称" type="VARCHAR2(64 BYTE)"/>
+            <column name="DIRECTION" remarks="方向：0 上行，1 下行" type="NUMBER(2, 0)"/>
+            <column name="ADD_TIME" remarks="入库时间" type="date"/>
+        </createTable>
+    
+        <createTable tableName="FACE_SYS_BASIC_PARAMS" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FACE_SYS_BASIC_PARAMS_ID"/>
+            </column>
+            <column name="LANGUAGE" remarks="系统语言 0：英文 1：中文简体 2：中文繁体" type="NUMBER"/>
+            <column name="DBENABLE" remarks="是否开启记录抓拍+认证+身份证" type="NUMBER"/>
+            <column name="IDCARDTYPE" remarks="身份证读卡器类型，0：中控，腾研，华视；1：精伦" type="NUMBER"/>
+            <column name="LIVEENABLE" remarks="是否开启活体检测" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIVETHRESHOLD" remarks="活体检测阈值" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIVEFRAMENUM" remarks="活体检测连续帧数" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCREENSAVERTYPE" remarks="屏保类型 0: 从不，1: 全天支持，2:按时段支持" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCREENSAVERTIMEBEG" remarks="屏保启动时间段, 当天点开始计算的秒数" type="NUMBER"/>
+            <column name="SCREENSAVERTIMEEND" remarks="屏保结束时间段, 当天点开始计算的秒数" type="NUMBER"/>
+            <column name="SCREENSAVERONMIN" remarks="在未抓拍到人脸后多少分钟启动屏保" type="NUMBER"/>
+            <column name="LEDTYPE" remarks="白光灯开启类型 0: 从不，1: 按时段支持" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEDTIMEBEG" remarks="白光灯启动时间点, 当天点开始计算的秒数" type="NUMBER"/>
+            <column name="LEDTIMEEND" remarks="白光灯结束时间点, 当天点开始计算的秒数" type="NUMBER"/>
+            <column name="LEDBRIGHTNESS" remarks="白光灯亮度" type="NUMBER"/>
+            <column name="CARDREADERTYPE" remarks="读卡器类型" type="NUMBER"/>
+            <column name="DISPLAYFACEFRAME" remarks="是否显示人脸框" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICEID" remarks="设备ID" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEDATE" remarks="创建时间" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATOR" remarks="创建者" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATETIME" remarks="更新时间" type="date"/>
+            <column name="UPDATOR" remarks="更新者" type="VARCHAR2(50 BYTE)"/>
+            <column name="SZRES" remarks="预留字段" type="VARCHAR2(100 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="JF_ACCOUNT" tablespace="YKT_DATA">
+            <column defaultValue="0" name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="CURR_JF" remarks="当前积分" type="NUMBER(5, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="TOTAL_JF" remarks="总累计积分" type="NUMBER(6, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="YES_ADD_JF" remarks="昨日新增积分" type="NUMBER(4, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="CURR_USA_TIC" remarks="当前可用乘车券" type="NUMBER(3, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="TOTAL_TIC" remarks="总累计乘车券" type="NUMBER(4, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USE_TIC_TIME" remarks="当天使用乘车券消费时间&#10;通过该时间限制一天使用一次乘车券" type="date"/>
+            <column name="ADD_TIME" remarks="入库时间" type="date"/>
+            <column name="UPDATE_TIME" remarks="更新时间" type="date"/>
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011235"/>
+            </column>
+            <column name="JF_TYPE" remarks="积分类型" type="VARCHAR2(5 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="JF_ACC_DAILY" tablespace="YKT_DATA">
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="DATE_TIME" remarks="日期" type="VARCHAR2(8 BYTE)"/>
+            <column defaultValueNumeric="0" name="SIGN_JF" remarks="注册积分" type="NUMBER(3, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="CONV_JF" remarks="兑换积分" type="NUMBER(3, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="EXCH_JF" remarks="退还积分" type="NUMBER(3, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BEFOR_JF" remarks="日结前积分" type="NUMBER(5, 1)"/>
+            <column defaultValueNumeric="0" name="DAILY_JF" remarks="积分日结" type="NUMBER(5, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADD_TIME" remarks="入库时间" type="date"/>
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011241"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="JF_ACC_JOUR" tablespace="YKT_DATA">
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="DATE_TIME" remarks="日期" type="VARCHAR2(30 BYTE)"/>
+            <column defaultValue="0" name="OPERAT_TYPE" remarks="操作类型&#10;0：注册送积分；1、消费送积分；2：充值送积分；3、账户注销减积分4、兑换乘车券减积分；5、积分日结；6、安阳信息网增加积分" type="VARCHAR2(2 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OPERAT_TIME" remarks="操作时间" type="date"/>
+            <column defaultValueNumeric="0" name="JF_NUM" remarks="积分" type="NUMBER(10, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011245"/>
+            </column>
+            <column name="OPERATOR" remarks="操作员" type="VARCHAR2(10 BYTE)"/>
+            <column name="SERIALNO" remarks="积分流水号" type="VARCHAR2(20 BYTE)"/>
+            <column name="JF_TYPE" remarks="积分类型" type="VARCHAR2(5 BYTE)"/>
+            <column defaultValueNumeric="0" name="USED_JF_NUM" remarks="已使用积分数量" type="NUMBER(10, 1)"/>
+            <column defaultValue="0" name="IS_USEUP" remarks="本次积分是否用完，0:未使用完，1：已使用完" type="VARCHAR2(1 BYTE)"/>
+            <column name="INDATE_DATE" remarks="到期时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_EXPIRE" remarks="是否过期 0：未过期  1：已过期" type="NUMBER(2, 0)"/>
+            <column name="INDATE_TIME" remarks="有效期(月)" type="NUMBER(4, 0)"/>
+        </createTable>
+    
+        <createTable tableName="JF_ACC_JOUR_HIS" tablespace="YKT_DATA">
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="DATE_TIME" remarks="日期" type="VARCHAR2(30 BYTE)"/>
+            <column defaultValue="0" name="OPERAT_TYPE" remarks="操作类型&#10;0：注册送积分；1、消费送积分；2：充值送积分；3、账户注销减积分4、兑换乘车券减积分；5、积分日结" type="VARCHAR2(2 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OPERAT_TIME" remarks="操作时间" type="date"/>
+            <column defaultValueNumeric="0" name="JF_NUM" remarks="积分" type="NUMBER(10, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011249"/>
+            </column>
+            <column name="OPERATOR" remarks="操作员" type="VARCHAR2(10 BYTE)"/>
+            <column name="SERIALNO" remarks="积分流水号" type="VARCHAR2(20 BYTE)"/>
+            <column name="JF_TYPE" remarks="积分类型" type="VARCHAR2(5 BYTE)"/>
+            <column defaultValueNumeric="0" name="USED_JF_NUM" remarks="已使用积分数量" type="NUMBER(10, 1)"/>
+            <column defaultValue="0" name="IS_USEUP" remarks="本次积分是否用完，0:未使用完，1：已使用完" type="VARCHAR2(1 BYTE)"/>
+            <column name="INDATE_DATE" remarks="到期时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_EXPIRE" remarks="是否过期 0：未过期  1：已过期" type="NUMBER(2, 0)"/>
+            <column name="INDATE_TIME" remarks="有效期(月)" type="NUMBER(4, 0)"/>
+        </createTable>
+    
+        <createTable tableName="JF_BUS_TIC" tablespace="YKT_DATA">
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="TIC_CODE" remarks="乘车券标识码" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CRE_TIME" remarks="生成日期" type="date"/>
+            <column defaultValueNumeric="1" name="INDATE_TIME" remarks="有效期" type="NUMBER(4, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CON_TIME" remarks="消费日期" type="date"/>
+            <column name="TIC_TYPE" remarks="生成类型&#10;1:积分兑换；2：赠送" type="VARCHAR2(3 BYTE)"/>
+            <column defaultValueNumeric="0" name="IS_EXPIRE" remarks="是否过期 0：未过期  1：已过期" type="NUMBER(2, 0)"/>
+            <column name="INDATE_DATE" remarks="到期时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_CONSUM" remarks="是否消费&#10;0：未消费   1：已消费" type="NUMBER(2, 0)"/>
+            <column name="TIC_SOURCE" remarks="积分类型" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="JF_BUS_TIC_HIS" tablespace="YKT_DATA">
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="TIC_CODE" remarks="乘车券标识码" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011254"/>
+            </column>
+            <column name="CRE_TIME" remarks="生成日期" type="date"/>
+            <column defaultValueNumeric="1" name="INDATE_TIME" remarks="有效期" type="NUMBER(4, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CON_TIME" remarks="消费日期" type="date"/>
+            <column name="TIC_TYPE" remarks="生成类型&#10;1:积分兑换；2：赠送" type="VARCHAR2(3 BYTE)"/>
+            <column defaultValueNumeric="0" name="IS_EXPIRE" remarks="是否过期 0：未过期  1：已过期" type="NUMBER(2, 0)"/>
+            <column name="INDATE_DATE" remarks="到期时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_CONSUM" remarks="是否消费&#10;0：未消费   1：已消费" type="NUMBER(2, 0)"/>
+            <column name="TIC_SOURCE" remarks="积分类型" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="JF_CONSUMPTION_RECORDS" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011256"/>
+            </column>
+            <column name="CONSUME_JF_NUM" remarks="消费积分数量" type="NUMBER(10, 1)"/>
+            <column name="CONSUME_TYPE" remarks="消费类型" type="VARCHAR2(5 BYTE)"/>
+            <column name="CONSUME_TIME" remarks="消费时间" type="date"/>
+            <column name="JF_TYPE" remarks="积分类型" type="VARCHAR2(5 BYTE)"/>
+            <column name="JFJOUR_ID" remarks="积分流水记录id,关联积分流水表" type="VARCHAR2(2000 BYTE)"/>
+            <column name="ACC_ID" remarks="账户号" type="VARCHAR2(15 BYTE)"/>
+            <column name="SERIALNO" remarks="消费流水号" type="VARCHAR2(20 BYTE)"/>
+            <column name="CREATEDATE" type="date"/>
+        </createTable>
+    
+        <createTable tableName="JF_DEMO" tablespace="YKT_DATA">
+            <column name="NAME" type="VARCHAR2(100 BYTE)"/>
+            <column name="AGE" type="VARCHAR2(5 BYTE)"/>
+            <column name="ADDRESS" type="VARCHAR2(5 BYTE)"/>
+            <column name="ADD1" type="VARCHAR2(5 BYTE)"/>
+            <column name="ADD2" type="VARCHAR2(5 BYTE)"/>
+            <column name="ADD3" type="VARCHAR2(5 BYTE)"/>
+            <column name="ADD4" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="JF_RULE" tablespace="YKT_DATA">
+            <column defaultValueNumeric="1" name="TIC_USE_TIME" remarks="乘车券每天限使用次数&#10;1代表1次，0代表不限制" type="NUMBER(2, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="10" name="CONSUME_JF_RATE" remarks="消费金额兑换积分的比率&#10;1代表1元兑换1个积分" type="NUMBER(3, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="10" name="PAY_JF_RATE" remarks="充值金额兑换积分的比率&#10;1代表1元兑换1个积分" type="NUMBER(3, 1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="3" name="JF_TIC_RATE" remarks="配置多少积分可以兑换一个乘车券 默认值10" type="NUMBER(2, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="SIGN_NUM_JF" remarks="注册新用户送积分数" type="NUMBER(2, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID" type="VARCHAR2(40 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011263"/>
+            </column>
+            <column name="JF_ENABLE" remarks="配置是否启用积分、乘车券功能 1:启用；0：不启用（默认）" type="VARCHAR2(1 BYTE)"/>
+            <column name="TIC_TIMEOUTDAYS" remarks="配置乘车券过期时间（天） 默认值30" type="NUMBER(4, 0)"/>
+            <column name="INPROMOTION_JF" remarks="内部推广人员推广一次送多少积分，默认为0" type="NUMBER(2, 0)"/>
+            <column name="OUTPROMOTION_JF" remarks="外部推广人员推广一次送多少积分，默认为0" type="NUMBER(2, 0)"/>
+            <column name="JF_USETIMEOUTMONS" remarks="配置积分过期时间（月） 默认值12个月" type="NUMBER(2, 0)"/>
+        </createTable>
+    
+        <createTable remarks="线路收藏" tableName="LINE_COLLECTION" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键uuid" type="VARCHAR2(64 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011266"/>
+            </column>
+            <column name="LINEID" remarks="线路id" type="NVARCHAR2(32)"/>
+            <column name="LINENO" remarks="线路号" type="VARCHAR2(32 BYTE)"/>
+            <column name="LINENAME" remarks="线路名称" type="NVARCHAR2(64)"/>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(15 BYTE)"/>
+            <column name="STARTSITE" remarks="起点" type="NVARCHAR2(100)"/>
+            <column name="ENDSITE" remarks="终点" type="NVARCHAR2(100)"/>
+            <column defaultValueNumeric="0" name="ISUPDOWN" remarks="上下行：0上行，1下行" type="NUMBER(2, 0)"/>
+            <column name="ADDTIME" remarks="入库时间" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable remarks="RSA算法密钥" tableName="RSA_KEY" tablespace="YKT_DATA">
+            <column name="PUBLICKEY" remarks="公钥" type="VARCHAR2(256 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRIVATEKEY" remarks="私钥" type="VARCHAR2(1024 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACCOUNTNO" remarks="账号" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011270"/>
+            </column>
+        </createTable>
+    
+        <createTable tableName="RUN_PUBCONTENT" tablespace="YKT_DATA">
+            <column name="ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011276"/>
+            </column>
+            <column name="GROUPCODE" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PUBTITLE" type="VARCHAR2(200 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DETAIL" type="BLOB"/>
+            <column defaultValueComputed="SYSDATE" name="ADDTIME" type="date"/>
+            <column defaultValueNumeric="1" name="STATE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REMARK" type="VARCHAR2(1000 BYTE)"/>
+            <column defaultValueNumeric="0" name="SCOPE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SIGN" remarks="英文标识" type="VARCHAR2(20 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="RUN_PUBGROUP" tablespace="YKT_DATA">
+            <column name="ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011282"/>
+            </column>
+            <column name="GROUPCODE" type="VARCHAR2(20 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUPNAME" type="VARCHAR2(200 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="SYSDATE" name="ADDTIME" type="date"/>
+            <column defaultValueNumeric="1" name="STATE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REMARK" type="VARCHAR2(1000 BYTE)"/>
+            <column defaultValueNumeric="0" name="TYPE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+   
+        <createTable remarks="推广人员" tableName="SHARE_USER" tablespace="YKT_DATA">
+            <column name="ID" remarks="序号" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011285"/>
+            </column>
+            <column name="NAME" remarks="推广人员姓名" type="NVARCHAR2(64)"/>
+            <column name="MOBILE" remarks="推广人员手机号" type="NVARCHAR2(16)"/>
+            <column name="COMPANY" remarks="公司" type="NVARCHAR2(64)"/>
+            <column name="DEPT" remarks="部门" type="NVARCHAR2(64)"/>
+            <column name="ADDTIME" remarks="添加时间" type="date"/>
+            <column name="WORKNO" remarks="工号" type="NVARCHAR2(16)"/>
+            <column name="SEX" remarks="性别：0 女；1 男" type="NUMBER(2, 0)"/>
+        </createTable>
+    
+        <createTable tableName="SMSVALIDCODE" tablespace="YKT_DATA">
+            <column name="CELLPHONENUMBER" type="VARCHAR2(15 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011288"/>
+            </column>
+            <column name="VALIDCODE" type="VARCHAR2(10 BYTE)"/>
+            <column defaultValueComputed="SYSDATE" name="CREATEDTIME" type="date"/>
+            <column name="ISUSE" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="SYS_TEMP_FBT">
+            <column name="SCHEMA" type="VARCHAR2(32 BYTE)"/>
+            <column name="OBJECT_NAME" type="VARCHAR2(32 BYTE)"/>
+            <column name="OBJECT#" type="NUMBER"/>
+            <column name="RID" type="UROWID"/>
+            <column name="ACTION" type="CHAR(1 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="TK_MOT_CARD_TRADE_RC" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011290"/>
+            </column>
+            <column name="TRADE_CODE" remarks="交易代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="CONSUME_TYPE" remarks="消费类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="SWEEP_TYPE" remarks="扫码类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="SYS_TRACKING_NUM" remarks="系统跟踪号" type="VARCHAR2(6 BYTE)"/>
+            <column name="PAY_ACC" remarks="支付账户号  手机号去掉首位的1" type="VARCHAR2(20 BYTE)"/>
+            <column name="ORGANIZATION_CODE" remarks="机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="SEND_DATE" remarks="发送日期" type="VARCHAR2(15 BYTE)"/>
+            <column name="BALANCE_DATE" remarks="清算日期" type="VARCHAR2(15 BYTE)"/>
+            <column name="VERSION_SIGN" remarks="版本标记" type="VARCHAR2(12 BYTE)"/>
+            <column name="VERSION_NO" remarks="版本号" type="VARCHAR2(8 BYTE)"/>
+            <column name="TAIL_REC_COUNT" remarks="交易记录数" type="NUMBER(10, 0)"/>
+            <column name="MAK" remarks="MAK" type="VARCHAR2(16 BYTE)"/>
+            <column name="MAC" remarks="MAC" type="VARCHAR2(16 BYTE)"/>
+            <column name="USER_ACC" remarks="用户账户号" type="VARCHAR2(20 BYTE)"/>
+            <column name="ACCEPT_CODE" remarks="收单机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="ISSUE_ORG_CODE" remarks="发卡机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="PUBLISH_ORG_CODE" remarks="发码平台代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="TENANTS_TYPE" remarks="商户类型" type="VARCHAR2(4 BYTE)"/>
+            <column name="CHANNEL_TYPE" remarks="渠道类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="CARD_RECEIVER_CODE" remarks="受卡方标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="CARD_RECEIVER_NAMEADDR" remarks="受卡方 名称地址" type="VARCHAR2(40 BYTE)"/>
+            <column name="ORGINAL_TRADE_INFO" remarks="原始交易信息" type="VARCHAR2(23 BYTE)"/>
+            <column name="CENT_SEQ" remarks="清分结算机构流水号" type="VARCHAR2(12 BYTE)"/>
+            <column name="TARDE_MONEY" remarks="交易金额 消费依据字段" type="NUMBER(18, 0)"/>
+            <column name="INDEX_CODE" remarks="检索参考号" type="VARCHAR2(12 BYTE)"/>
+            <column name="ACCEPT_SEQ" remarks="收单机构流水号" type="VARCHAR2(12 BYTE)"/>
+            <column name="ACCEPT_DATE" remarks="收单机构日期" type="VARCHAR2(14 BYTE)"/>
+            <column name="CURRENCY_CODE" remarks="货币代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="PREFRERENTIAL_TYPE" remarks="优惠类型" type="VARCHAR2(4 BYTE)"/>
+            <column name="RECEIVABLE_MONEY" remarks="应收金额" type="NUMBER(12, 0)"/>
+            <column name="ARITHMETIC_TAG" remarks="算法标识" type="VARCHAR2(2 BYTE)"/>
+            <column name="ARRIVE_ACCEPT_FLAG" remarks="进站受卡机 终端标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="ACCEPT_TRADE_SEQ" remarks="进站终端 交易序号" type="VARCHAR2(8 BYTE)"/>
+            <column name="TRADE_SUMMARY" remarks="交易摘要" type="VARCHAR2(220 BYTE)"/>
+            <column name="ARRIVE_TIME" remarks="进站时间" type="VARCHAR2(19 BYTE)"/>
+            <column name="LEAVE_ACCEPT_FLAG" remarks="出站受卡机 终端标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="LEAVE_TRADE_SEQ" remarks="出站终端 交易序号" type="VARCHAR2(8 BYTE)"/>
+            <column name="LEAVE_STATION_TIME" remarks="出站时间" type="VARCHAR2(14 BYTE)"/>
+            <column name="SAVE_SEQ" remarks="保留域" type="VARCHAR2(32 BYTE)"/>
+            <column name="ORIGINAL_CODE" remarks="原始交易代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="ORIGINAL_TIME" remarks="原始交易时间" type="VARCHAR2(14 BYTE)"/>
+            <column name="ORIGINAL_SYS_CODE" remarks="原始交易系统跟踪号" type="VARCHAR2(6 BYTE)"/>
+            <column name="ORIGINAL_DATE" remarks="原始交易结算日期" type="VARCHAR2(4 BYTE)"/>
+            <column name="TLV_RECORD_VERSION" remarks="记录版本" type="VARCHAR2(50 BYTE)"/>
+            <column name="TLV_CODE_TEXT" remarks="二维码原始信息" type="VARCHAR2(1000 CHAR)"/>
+            <column name="TLV_RECEIVED_POS_SEQ" remarks="受理终端流水号" type="VARCHAR2(30 BYTE)"/>
+            <column name="TLV_CURRENCY_TYPE" remarks="币种" type="VARCHAR2(4 BYTE)"/>
+            <column name="TLV_SPEND_AMOUNT" remarks="消费金额" type="VARCHAR2(12 BYTE)"/>
+            <column name="TLV_VEHICLE_NUM" remarks="车辆编号" type="VARCHAR2(32 BYTE)"/>
+            <column name="TLV_PLATE_NUMBER" remarks="车牌号" type="VARCHAR2(32 BYTE)"/>
+            <column name="TLV_DRIVER_CODE" remarks="驾驶员编号，统一到了司机号" type="VARCHAR2(30 BYTE)"/>
+            <column name="TLV_LINE_INFO" remarks="线路信息(上车)" type="VARCHAR2(1000 BYTE)"/>
+            <column name="TLV_STATION_NO" remarks="站点编号(上车）" type="VARCHAR2(32 BYTE)"/>
+            <column name="TLV_LONGGITUDE_LATITUDE" remarks="经纬度(上车站点）" type="VARCHAR2(50 BYTE)"/>
+            <column name="TLV_RECEIVED_POS_TIME" remarks="受理终端时间（上车）" type="VARCHAR2(20 BYTE)"/>
+            <column name="IN_TIME" remarks="入库时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_TRANS" remarks="划拨/反馈标记" type="NUMBER(1, 0)"/>
+            <column defaultValueNumeric="0" name="IS_MOT" remarks="部级清算标记: 0-省内清算; 1-部级清算" type="NUMBER(1, 0)"/>
+            <column name="CDFILE_NAME" remarks="CD文件名" type="VARCHAR2(50 BYTE)"/>
+            <column defaultValue="" name="DEAL_TYPES" remarks="已处理的文件类型" type="VARCHAR2(50 BYTE)"/>
+            <column name="FBFILE_NAME" remarks="FB文件名" type="VARCHAR2(50 BYTE)"/>
+            <column defaultValueNumeric="0" name="IS_SEND" remarks="发送标记" type="NUMBER(1, 0)"/>
+            <column defaultValueNumeric="0" name="ACCEPT_PROFIT" remarks="收单分润" type="NUMBER(18, 9)"/>
+            <column defaultValueNumeric="0" name="ISSUER_PROFIT" remarks="发卡分润" type="NUMBER(18, 9)"/>
+            <column name="UPCITY" remarks="上车城市" type="VARCHAR2(300 BYTE)"/>
+            <column defaultValue="000000" name="RESULT_CODE" remarks="错误标识" type="VARCHAR2(10 BYTE)"/>
+            <column name="RESULT_DESC" remarks="错误描述" type="VARCHAR2(120 BYTE)"/>
+            <column name="ORDER_NO" remarks="消费订单号" type="VARCHAR2(40 BYTE)"/>
+            <column name="DEALEDFLAG" remarks="消费处理标识：1 已处理，0 未处理" type="VARCHAR2(5 BYTE)"/>
+            <column name="ACCOUNT_FLAG" remarks="反馈标识 1 已经传输，0 未传输" type="VARCHAR2(5 BYTE)"/>
+            <column name="UPSITE_POS" remarks="上车终端号 tlv 2009" type="VARCHAR2(255 BYTE)"/>
+            <column name="PUSH_FLAG" remarks="推送标识" type="VARCHAR2(5 BYTE)"/>
+            <column name="TRADEFLOWNO" remarks="车辆编号" type="VARCHAR2(64 BYTE)"/>
+            <column name="LINE_NAME" remarks="线路名称" type="VARCHAR2(50 BYTE)"/>
+            <column name="CITY_NAME" remarks="城市名称" type="VARCHAR2(255 BYTE)"/>
+            <column name="LEAVE_CENTSEQ" remarks="唯一标识的流水，对应原本的出站保留域" type="VARCHAR2(60 BYTE)"/>
+            <column name="CONSUME_FAILED_FLAG" remarks="消费失败推送标识，推送一次。" type="VARCHAR2(5 BYTE)"/>
+            <column name="PAY_TIME" remarks="支付时间" type="date"/>
+            <column defaultValueNumeric="0" name="REFUND_STATUS" remarks="退款状态 0:未退款，1:已退款" type="NUMBER(2, 0)"/>
+            <column name="REFUND_TIME" remarks="申请退款时间" type="date"/>
+            <column name="OPERATOR" remarks="操作员账号" type="NVARCHAR2(32)"/>
+            <column name="OPERATOR_NAME" remarks="操作员姓名" type="NVARCHAR2(32)"/>
+            <column name="OPERATOR_IP" remarks="操作员ip" type="NVARCHAR2(20)"/>
+            <column name="CITY_NO" remarks="城市号" type="NVARCHAR2(30)"/>
+            <column name="IS_POINT" remarks="是否成功生成积分（0：不成功，1成功）" type="VARCHAR2(5 BYTE)"/>
+            <column name="CONSUME_PAY_TYPE" remarks="消费优惠交易类型:积分抵扣交易\营销折扣交易" type="VARCHAR2(20 BYTE)"/>
+            <column name="CONSUME_CHANNEL" remarks="消费渠道 face:人脸" type="VARCHAR2(10 BYTE)"/>
+            <column name="CONSUME_IMAGE_PATH" remarks="消费图片路径" type="VARCHAR2(255 BYTE)"/>
+            <column name="DEDUCTION_TYPE" remarks="消费扣款类型，0：正常扣款；1：使用乘车券" type="VARCHAR2(1 BYTE)"/>
+            <column name="TICKET_NO" remarks="优惠券ID" type="VARCHAR2(50 BYTE)"/>
+            <column name="TRADE_TYPE" remarks="对应支付中心消费类型" type="VARCHAR2(2 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="TK_MOT_CARD_TRADE_RC_HIS" tablespace="YKT_DATA">
+            <column name="ID" type="VARCHAR2(50 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011292"/>
+            </column>
+            <column name="TRADE_CODE" remarks="交易代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="CONSUME_TYPE" remarks="消费类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="SWEEP_TYPE" remarks="扫码类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="SYS_TRACKING_NUM" remarks="系统跟踪号" type="VARCHAR2(6 BYTE)"/>
+            <column name="PAY_ACC" remarks="支付账户号  手机号去掉首位的1" type="VARCHAR2(20 BYTE)"/>
+            <column name="ORGANIZATION_CODE" remarks="机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="SEND_DATE" remarks="发送日期" type="VARCHAR2(15 BYTE)"/>
+            <column name="BALANCE_DATE" remarks="清算日期" type="VARCHAR2(15 BYTE)"/>
+            <column name="VERSION_SIGN" remarks="版本标记" type="VARCHAR2(12 BYTE)"/>
+            <column name="VERSION_NO" remarks="版本号" type="VARCHAR2(8 BYTE)"/>
+            <column name="TAIL_REC_COUNT" remarks="交易记录数" type="NUMBER(10, 0)"/>
+            <column name="MAK" remarks="MAK" type="VARCHAR2(16 BYTE)"/>
+            <column name="MAC" remarks="MAC" type="VARCHAR2(16 BYTE)"/>
+            <column name="USER_ACC" remarks="用户账户号" type="VARCHAR2(20 BYTE)"/>
+            <column name="ACCEPT_CODE" remarks="收单机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="ISSUE_ORG_CODE" remarks="发卡机构代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="PUBLISH_ORG_CODE" remarks="发码平台代码" type="VARCHAR2(11 BYTE)"/>
+            <column name="TENANTS_TYPE" remarks="商户类型" type="VARCHAR2(4 BYTE)"/>
+            <column name="CHANNEL_TYPE" remarks="渠道类型" type="VARCHAR2(2 BYTE)"/>
+            <column name="CARD_RECEIVER_CODE" remarks="受卡方标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="CARD_RECEIVER_NAMEADDR" remarks="受卡方 名称地址" type="VARCHAR2(40 BYTE)"/>
+            <column name="ORGINAL_TRADE_INFO" remarks="原始交易信息" type="VARCHAR2(23 BYTE)"/>
+            <column name="CENT_SEQ" remarks="清分结算机构流水号" type="VARCHAR2(12 BYTE)"/>
+            <column name="TARDE_MONEY" remarks="交易金额 消费依据字段" type="NUMBER(18, 0)"/>
+            <column name="INDEX_CODE" remarks="检索参考号" type="VARCHAR2(12 BYTE)"/>
+            <column name="ACCEPT_SEQ" remarks="收单机构流水号" type="VARCHAR2(12 BYTE)"/>
+            <column name="ACCEPT_DATE" remarks="收单机构日期" type="VARCHAR2(14 BYTE)"/>
+            <column name="CURRENCY_CODE" remarks="货币代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="PREFRERENTIAL_TYPE" remarks="优惠类型" type="VARCHAR2(4 BYTE)"/>
+            <column name="RECEIVABLE_MONEY" remarks="应收金额" type="NUMBER(12, 0)"/>
+            <column name="ARITHMETIC_TAG" remarks="算法标识" type="VARCHAR2(2 BYTE)"/>
+            <column name="ARRIVE_ACCEPT_FLAG" remarks="进站受卡机 终端标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="ACCEPT_TRADE_SEQ" remarks="进站终端 交易序号" type="VARCHAR2(8 BYTE)"/>
+            <column name="TRADE_SUMMARY" remarks="交易摘要" type="VARCHAR2(220 BYTE)"/>
+            <column name="ARRIVE_TIME" remarks="进站时间" type="VARCHAR2(18 BYTE)"/>
+            <column name="LEAVE_ACCEPT_FLAG" remarks="出站受卡机 终端标识码" type="VARCHAR2(15 BYTE)"/>
+            <column name="LEAVE_TRADE_SEQ" remarks="出站终端 交易序号" type="VARCHAR2(8 BYTE)"/>
+            <column name="LEAVE_STATION_TIME" remarks="出站时间" type="VARCHAR2(14 BYTE)"/>
+            <column name="SAVE_SEQ" remarks="保留域" type="VARCHAR2(32 BYTE)"/>
+            <column name="ORIGINAL_CODE" remarks="原始交易代码" type="VARCHAR2(3 BYTE)"/>
+            <column name="ORIGINAL_TIME" remarks="原始交易时间" type="VARCHAR2(14 BYTE)"/>
+            <column name="ORIGINAL_SYS_CODE" remarks="原始交易系统跟踪号" type="VARCHAR2(6 BYTE)"/>
+            <column name="ORIGINAL_DATE" remarks="原始交易结算日期" type="VARCHAR2(4 BYTE)"/>
+            <column name="TLV_RECORD_VERSION" remarks="记录版本" type="VARCHAR2(50 BYTE)"/>
+            <column name="TLV_CODE_TEXT" remarks="二维码原始信息" type="VARCHAR2(1000 CHAR)"/>
+            <column name="TLV_RECEIVED_POS_SEQ" remarks="受理终端流水号" type="VARCHAR2(30 BYTE)"/>
+            <column name="TLV_CURRENCY_TYPE" remarks="币种" type="VARCHAR2(4 BYTE)"/>
+            <column name="TLV_SPEND_AMOUNT" remarks="消费金额" type="VARCHAR2(12 BYTE)"/>
+            <column name="TLV_VEHICLE_NUM" remarks="车辆编号" type="VARCHAR2(12 BYTE)"/>
+            <column name="TLV_PLATE_NUMBER" remarks="车牌号" type="VARCHAR2(12 BYTE)"/>
+            <column name="TLV_DRIVER_CODE" remarks="驾驶员编号，统一到了司机号" type="VARCHAR2(30 BYTE)"/>
+            <column name="TLV_LINE_INFO" remarks="线路信息(上车)" type="VARCHAR2(1000 BYTE)"/>
+            <column name="TLV_STATION_NO" remarks="站点编号(上车）" type="VARCHAR2(20 BYTE)"/>
+            <column name="TLV_LONGGITUDE_LATITUDE" remarks="经纬度(上车站点）" type="VARCHAR2(50 BYTE)"/>
+            <column name="TLV_RECEIVED_POS_TIME" remarks="受理终端时间（上车）" type="VARCHAR2(20 BYTE)"/>
+            <column name="IN_TIME" remarks="入库时间" type="date"/>
+            <column defaultValueNumeric="0" name="IS_TRANS" remarks="划拨/反馈标记" type="NUMBER(1, 0)"/>
+            <column defaultValueNumeric="0" name="IS_MOT" remarks="部级清算标记: 0-省内清算; 1-部级清算" type="NUMBER(1, 0)"/>
+            <column name="CDFILE_NAME" remarks="CD文件名" type="VARCHAR2(50 BYTE)"/>
+            <column defaultValue="" name="DEAL_TYPES" remarks="已处理的文件类型" type="VARCHAR2(50 BYTE)"/>
+            <column name="FBFILE_NAME" remarks="FB文件名" type="VARCHAR2(50 BYTE)"/>
+            <column defaultValueNumeric="0" name="IS_SEND" remarks="发送标记" type="NUMBER(1, 0)"/>
+            <column defaultValueNumeric="0" name="ACCEPT_PROFIT" remarks="收单分润" type="NUMBER(18, 9)"/>
+            <column defaultValueNumeric="0" name="ISSUER_PROFIT" remarks="发卡分润" type="NUMBER(18, 9)"/>
+            <column name="UPCITY" remarks="上车城市" type="VARCHAR2(300 BYTE)"/>
+            <column defaultValue="000000" name="RESULT_CODE" remarks="错误标识" type="VARCHAR2(10 BYTE)"/>
+            <column name="RESULT_DESC" remarks="错误描述" type="VARCHAR2(120 BYTE)"/>
+            <column name="ORDER_NO" remarks="消费订单号" type="VARCHAR2(40 BYTE)"/>
+            <column name="DEALEDFLAG" remarks="消费处理标识：1 已处理，0 未处理" type="VARCHAR2(5 BYTE)"/>
+            <column name="ACCOUNT_FLAG" remarks="反馈标识 1 已经传输，0 未传输" type="VARCHAR2(5 BYTE)"/>
+            <column name="UPSITE_POS" remarks="上车终端号 tlv 2009" type="VARCHAR2(255 BYTE)"/>
+            <column name="PUSH_FLAG" remarks="推送标识" type="VARCHAR2(5 BYTE)"/>
+            <column name="TRADEFLOWNO" remarks="车辆编号" type="VARCHAR2(64 BYTE)"/>
+            <column name="LINE_NAME" remarks="线路名称" type="VARCHAR2(50 BYTE)"/>
+            <column name="CITY_NAME" remarks="城市名称" type="VARCHAR2(255 BYTE)"/>
+            <column name="LEAVE_CENTSEQ" remarks="唯一标识的流水，对应原本的出站保留域" type="VARCHAR2(60 BYTE)"/>
+            <column name="CONSUME_FAILED_FLAG" remarks="消费失败推送标识，推送一次。" type="VARCHAR2(5 BYTE)"/>
+            <column name="PAY_TIME" remarks="支付时间" type="date"/>
+            <column defaultValueNumeric="0" name="REFUND_STATUS" remarks="退款状态 0:未退款，1:已退款" type="NUMBER(2, 0)"/>
+            <column name="REFUND_TIME" remarks="申请退款时间" type="date"/>
+            <column name="OPERATOR" remarks="操作员账号" type="NVARCHAR2(32)"/>
+            <column name="OPERATOR_NAME" remarks="操作员姓名" type="NVARCHAR2(32)"/>
+            <column name="OPERATOR_IP" remarks="操作员ip" type="NVARCHAR2(20)"/>
+            <column name="CITY_NO" remarks="城市号" type="NVARCHAR2(30)"/>
+            <column name="IS_POINT" remarks="是否成功生成积分（0：不成功，1成功）" type="VARCHAR2(5 BYTE)"/>
+            <column name="CONSUME_PAY_TYPE" remarks="消费优惠交易类型:积分抵扣交易\营销折扣交易" type="VARCHAR2(20 BYTE)"/>
+            <column name="DEDUCTION_TYPE" remarks="消费扣款类型，0：正常扣款；1：使用乘车券" type="VARCHAR2(1 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="TRAFFICINFO" tablespace="YKT_DATA">
+            <column name="ID" remarks="ID" type="NUMBER(20, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011295"/>
+            </column>
+            <column name="PARENTID" remarks="父CODE" type="NUMBER(20, 0)"/>
+            <column name="NAME" remarks="名称" type="VARCHAR2(100 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LANGITUDE" remarks="经度" type="VARCHAR2(20 BYTE)"/>
+            <column name="LATITUDE" remarks="纬度" type="VARCHAR2(20 BYTE)"/>
+            <column name="NO" remarks="排序" type="NUMBER(20, 0)"/>
+            <column name="BUSINFO" remarks="周边公交" type="VARCHAR2(300 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="WALLETACCOUNT" tablespace="YKT_DATA">
+            <column name="ID" remarks="ID" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011297"/>
+            </column>
+            <column name="ACCOUNTNO" remarks="钱包账户" type="VARCHAR2(64 BYTE)"/>
+            <column name="ACCOUNTNAME" remarks="钱包账户名" type="VARCHAR2(100 BYTE)"/>
+            <column name="UERORTERMINATEMODE" remarks="是否启用" type="NUMBER"/>
+            <column name="CERTTYPE" remarks="证件类型" type="NUMBER"/>
+            <column name="CERTNO" remarks="证件号码" type="VARCHAR2(50 BYTE)"/>
+            <column name="MOBILE" remarks="手机号码" type="VARCHAR2(20 BYTE)"/>
+            <column name="ISCERTFILE" remarks="是否上传影印件" type="NUMBER"/>
+            <column name="CERTFILENAME" remarks="影印件打包文件" type="VARCHAR2(60 BYTE)"/>
+            <column name="BOUNDACCNO" remarks="绑定银行卡卡号" type="VARCHAR2(64 BYTE)"/>
+            <column name="USERID" remarks="用户ID" type="NUMBER"/>
+            <column name="ADDTIME" remarks="添加时间" type="date"/>
+            <column name="PAYPASSWORD" remarks="支付密码" type="VARCHAR2(35 BYTE)"/>
+            <column name="BANKNUMBER" remarks="行号代码" type="VARCHAR2(20 BYTE)"/>
+            <column name="SIGN_FLAG" remarks="签约标识：YC:邮储银行，默认null" type="VARCHAR2(5 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="WALLETBANK" tablespace="YKT_DATA">
+            <column name="ID" remarks="id" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011299"/>
+            </column>
+            <column name="BANKNUMBER" remarks="行号" type="VARCHAR2(32 BYTE)"/>
+            <column name="BANKCODE" remarks="行别代码" type="VARCHAR2(32 BYTE)"/>
+            <column name="BANKNAME" remarks="行名" type="VARCHAR2(50 BYTE)"/>
+            <column name="CARDIMAGE" remarks="银行大图标" type="VARCHAR2(50 BYTE)"/>
+            <column name="BANKIMAGE" remarks="银行小图标" type="VARCHAR2(50 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="钱包流水记录" tableName="WALLETFLOWRECORD" tablespace="YKT_DATA">
+            <column name="ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PAYACCNAME" remarks="付款账户名" type="VARCHAR2(100 BYTE)"/>
+            <column name="PAYACCNO" remarks="付款账户" type="VARCHAR2(64 BYTE)"/>
+            <column name="PAYEEACCNAME" remarks="收款账户名" type="VARCHAR2(100 BYTE)"/>
+            <column name="PAYEEACCNO" remarks="收款账号" type="VARCHAR2(64 BYTE)"/>
+            <column name="OPERATIONTYPE" remarks="操作类型" type="NUMBER"/>
+            <column name="AMT" remarks="操作金额" type="NUMBER"/>
+            <column name="ADDTIME" remarks="添加时间" type="date"/>
+            <column name="ORDERNUMBER" remarks="操作类型为消费的时候的订单号" type="VARCHAR2(64 BYTE)"/>
+            <column name="CONSUMPTIONTYPE" remarks="消费类型" type="NUMBER"/>
+            <column name="REMARK" remarks="订单备注说明" type="VARCHAR2(1024 BYTE)"/>
+            <column name="SERIALNUMBER" remarks="向浙商银行业务请求的流水号" type="VARCHAR2(64 BYTE)"/>
+            <column name="CONTRACTNO" remarks="保证金协议号" type="VARCHAR2(64 BYTE)"/>
+            <column name="MOBILE" remarks="手机号" type="VARCHAR2(15 BYTE)"/>
+            <column defaultValue="" name="IS_POINT" remarks="是否已生成积分" type="VARCHAR2(20 BYTE)"/>
+        </createTable>
+    
+        <createTable tableName="WECHAT_ACCESS_TOKEN" tablespace="YKT_DATA">
+            <column name="TOKEN" type="VARCHAR2(255 BYTE)"/>
+            <column name="UPDATE_TIME" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <createTable remarks="广告图片" tableName="XYT_ADVERTISEMENT" tablespace="YKT_DATA">
+            <column name="ID" remarks="编号" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011308"/>
+            </column>
+            <column name="TITLE" remarks="标题" type="VARCHAR2(200 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PICTUREURL" remarks="图片地址" type="VARCHAR2(200 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" remarks="描述" type="VARCHAR2(500 BYTE)"/>
+            <column name="SORT" remarks="排序" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APPTYPE" remarks="App类型" type="NUMBER"/>
+            <column name="TYPE" remarks="广告类型" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATETIME" remarks="创建时间" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATEUSER" remarks="创建用户" type="VARCHAR2(32 BYTE)"/>
+            <column name="CONTENTLINK" remarks="内容链接" type="VARCHAR2(200 BYTE)"/>
+        </createTable>
+    
+        <createTable remarks="支付宝对账单信息" tableName="XYT_ALIPAY_BILL" tablespace="YKT_DATA">
+            <column name="ID" remarks="主键uuid" type="VARCHAR2(32 BYTE)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="SYS_C0011310"/>
+            </column>
+            <column name="TRADENO" remarks="支付宝交易号" type="NVARCHAR2(64)"/>
+            <column name="OUTTRADENO" remarks="商户订单号" type="NVARCHAR2(64)"/>
+            <column name="TRADETYPE" remarks="业务类型" type="NVARCHAR2(8)"/>
+            <column name="ORDERDESC" remarks="商品名称" type="NVARCHAR2(256)"/>
+            <column name="TRADETIME" remarks="创建时间" type="date"/>
+            <column name="COMPLETETIME" remarks="完成时间" type="date"/>
+            <column name="USERACCOUNT" remarks="对方账户" type="NVARCHAR2(100)"/>
+            <column name="ORDERAMOUNT" remarks="订单金额（元）" type="NUMBER(10, 2)"/>
+            <column name="MERCHANTRECEIPTAMOUNT" remarks="商家实收（元）" type="NUMBER(10, 2)"/>
+            <column name="REFUNDNO" remarks="退款批次号/请求号" type="NVARCHAR2(64)"/>
+            <column name="SERVICEFEE" remarks="服务费（元）" type="NUMBER(10, 2)"/>
+            <column name="REMARKDESC" remarks="备注" type="NVARCHAR2(256)"/>
+            <column name="ADDTIME" remarks="入库时间" type="date"/>
+        </createTable>
+    
+        <createIndex indexName="FACE_DEPT_UQ" tableName="FACE_DEPT_INFO" unique="true">
+            <column name="DEPT_NO"/>
+        </createIndex>
+    
+        <addUniqueConstraint columnNames="DEPT_NO" constraintName="FACE_DEPT_UQ" forIndexName="FACE_DEPT_UQ" tableName="FACE_DEPT_INFO"/>
+    
+        <createIndex indexName="FACE_ROAD_UQ" tableName="FACE_ROAD_INFO" unique="true">
+            <column name="ROAD_NO"/>
+        </createIndex>
+    
+        <addUniqueConstraint columnNames="ROAD_NO" constraintName="FACE_ROAD_UQ" forIndexName="FACE_ROAD_UQ" tableName="FACE_ROAD_INFO"/>
+    
+        <createIndex indexName="FACE_STATION_UQ" tableName="FACE_STATION_INFO" unique="true">
+            <column name="STATION_NO"/>
+        </createIndex>
+    
+        <addUniqueConstraint columnNames="STATION_NO" constraintName="FACE_STATION_UQ" forIndexName="FACE_STATION_UQ" tableName="FACE_STATION_INFO"/>
+    
+        <createIndex indexName="SYS_C0011283" tableName="RUN_PUBGROUP" unique="true">
+            <column name="GROUPCODE"/>
+        </createIndex>
+    
+        <addUniqueConstraint columnNames="GROUPCODE" constraintName="SYS_C0011283" forIndexName="SYS_C0011283" tableName="RUN_PUBGROUP"/>
+    
+        <createIndex indexName="SYS_C0011286" tableName="SHARE_USER" unique="true">
+            <column name="MOBILE"/>
+        </createIndex>
+    
+        <addUniqueConstraint columnNames="MOBILE" constraintName="SYS_C0011286" forIndexName="SYS_C0011286" tableName="SHARE_USER"/>
+    </changeSet>
+</databaseChangeLog>

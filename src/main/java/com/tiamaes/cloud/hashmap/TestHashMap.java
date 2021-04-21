@@ -1,0 +1,24 @@
+package com.tiamaes.cloud.hashmap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author yangqigong
+ * @version 1.0
+ * @date 2021/3/29 14:56
+ */
+public class TestHashMap {
+    public static void main(String[] args) {
+        /*Map<String,Object> result = new HashMap<>();*/
+        float a = 0.75f;
+        int n = 18 - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        System.out.println(n);
+
+    }
+}

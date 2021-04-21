@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.32.12:20014
+        namespace: default
+        group: default
+      config:
+        server-addr: 192.168.32.12:20014
+        # 定义配置文件类型
+        file-extension: yml
+        # 设置共享文件/通用配置
+        #shared-dataids: bootstrap.yml
+        # 自动刷新通用配置文件
+        #refreshable-dataids: bootstrap.yml
+        refresh-enabled: true
+        namespace: default
+        group: default
+
+testName: yqg
+testTime: 0 33 15 * * ?
