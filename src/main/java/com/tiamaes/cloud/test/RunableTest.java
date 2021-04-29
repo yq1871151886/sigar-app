@@ -16,13 +16,50 @@ import java.util.concurrent.*;
 public class RunableTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         long start = System.currentTimeMillis();
-        Callable<String> callable1 = new ThreadBean("线程1执行,7000");
-        Callable<String> callable2 = new ThreadBean("线程2执行,5000");
-        Callable<String> callable3 = new ThreadBean("线程3执行,3000");
         ExecutorService executorService = Executors.newCachedThreadPool();
-        Future<String> submit1 = executorService.submit(callable1);
-        Future<String> submit2 = executorService.submit(callable2);
-        Future<String> submit3 = executorService.submit(callable3);
+        Future<String> submit1 = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String a = "线程1执行,7000";
+                String[] split = a.split(",");
+                String s = split[1];
+                try {
+                    Thread.sleep(Long.valueOf(s));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return a;
+            }
+        });
+        Future<String> submit2 = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String b = "线程1执行,5000";
+                String[] split = b.split(",");
+                String s = split[1];
+                try {
+                    Thread.sleep(Long.valueOf(s));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return b;
+            }
+        });
+        Future<String> submit3 = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String c = "线程1执行,3000";
+                String[] split = c.split(",");
+                String s = split[1];
+                try {
+                    Thread.sleep(Long.valueOf(s));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return c;
+            }
+        });
+
         boolean flag = true;
         while (flag){
             if (submit1.isDone() && submit2.isDone() && submit3.isDone()){

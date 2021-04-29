@@ -11,7 +11,10 @@ import java.util.concurrent.Callable;
  */
 @Data
 public class ThreadBean implements Callable<String> {
+
     private String a;
+
+
     @Override
     public String call(){
         String[] split = a.split(",");
